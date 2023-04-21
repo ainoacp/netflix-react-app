@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const NavBar = () => {
     return (
-      <header className='flex justify-between items-center p-8 bg-gradient-to-b from-black from-15% to-transparent'>
+      <header className='flex justify-between items-center p-8 bg-gradient-to-b from-black from-15% to-transparent z-10'>
         <div className='flex items-center'>
             <NetflixLogo/>
             <div  className='ml-6'>
