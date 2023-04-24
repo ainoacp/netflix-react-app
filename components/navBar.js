@@ -1,10 +1,10 @@
-import NetflixLogo from '../../public/images/Vector.svg'
+import NetflixLogo from '../../netflix-react-app/public/images/Vector.svg'
 import { BellIcon, MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
 
 const NavBar = () => {
     return (
-      <header className='flex justify-between items-center p-8 bg-gradient-to-b from-black from-15% to-transparent z-10'>
+      <header className='flex justify-between items-center bg-gradient-to-b from-black from-15% to-transparent z-10 pt-4'>
         <div className='flex items-center'>
             <NetflixLogo/>
             <div  className='ml-6'>
