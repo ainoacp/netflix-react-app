@@ -3,22 +3,28 @@ import { HandThumbUpIcon, XMarkIcon, PlusCircleIcon, SpeakerXMarkIcon } from '@h
 import { PlayIcon, StarIcon } from '@heroicons/react/20/solid'
 import Genres from './Genres'
 
-const Modal = ({ modalVisible, setModalVisible, modalContentId, type }) => {
+const Modal = ({ modalVisible, setModalVisible, modalContentId, type, modalContent }) => {
   
   const baseURL = 'https://api.themoviedb.org/3'
   const API_KEY = 'f247ff737ec8062f3b5e027789eab748'
   
   const [content, setContent] = useState()
   const [similars, setSimilars] = useState()
+  const [video, setVideo] = useState()
+
+  const checkVideos = () => {}
   
   useEffect(() => {
-    fetch(`${baseURL}/${type === 'tv' ? 'tv' : 'movie'}/${modalContentId}?api_key=${API_KEY}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log('CONTENT', data)
-        setContent(data)
-      })
-  }, [modalContentId])
+    console.log(modalContent?.media_type)
+    if (modalContent?.media_type === 'movie') {
+        fetch(`${baseURL}/${type === 'tv' ? 'tv' : 'movie'}/${modalContent.id}/videos?api_key=${API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log('VIDEOS DATA', data.results[0].key)
+            setVideo(data.results[0].key)
+        })
+    }
+  }, [modalContent])
 
   useEffect(() => {
     fetch(`${baseURL}/${type === 'tv' ? 'tv' : 'movie'}/${modalContentId}/similar?api_key=${API_KEY}&language=ES`)
@@ -32,22 +38,32 @@ const Modal = ({ modalVisible, setModalVisible, modalContentId, type }) => {
   return (
     <div
       className={`absolute inset-0 z-50 bg-black/60 flex justify-center overflow-y-auto ${modalVisible ? '' : 'hidden'}`}
+      onClick={(e) => e.target === e.currentTarget && setModalVisible(false)}
     >
       <div className="relative flex w-9/12 overflow-hidden bg-black shadow-2xl rounded-xl h-4/6 min-h-[750px]">
         <div
           className={'absolute top-4 right-4 w-8 h-8 bg-black rounded-full flex items-center justify-center cursor-pointer z-50'}
           onClick={() => setModalVisible(false)}
         >
-          <XMarkIcon className={'w-6 h-6- text-white'} />
+          <XMarkIcon className={'w-6 h-6 text-white'} />
         </div>
         <div className={'w-full'}>
           <div className={'bg-cover w-full h-[450px] bg-center flex justify-end relative flex-col z-10 p-8'}
             style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/original${content?.backdrop_path})`,
+              backgroundImage: `url(https://image.tmdb.org/t/p/original${modalContent?.backdrop_path})`,
             }}
           >
-            <div className='flex flex-col'>
-                <h3 className={'text-5xl font-bold text-white'}>{content?.title}</h3>
+            {modalVisible && (
+                <iframe
+                className={'absolute w-full h-[450px] top-0 left-0'}
+                width="420"
+                height="315"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                src={`https://www.youtube.com/embed/${video}?autoplay=1`}
+              ></iframe>
+            )}
+            <div className='flex flex-col text-white'>
+                <h3 className={'text-5xl font-bold'}>{content?.title}</h3>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center my-3'>
                         <button className='flex items-center justify-center rounded-sm bg-slate-100 p-2 text-black w-20 h-7 text-sm mr-1'>
@@ -69,14 +85,14 @@ const Modal = ({ modalVisible, setModalVisible, modalContentId, type }) => {
             <div>
                 <div className='flex gap-2 text-xs'>
                     <p className='text-green-300'>98% Match</p>
-                    <p>{content?.release_date}</p>
-                    <p>{content?.runtime}min</p>
-                    <p className='flex items-center'>{content?.popularity}<StarIcon className='h-3 text-white'/></p>
+                    <p>{modalContent?.release_date}</p>
+                    <p>{modalContent?.runtime}min</p>
+                    <p className='flex items-center'>{modalContent?.popularity}<StarIcon className='h-3 text-white'/></p>
                 </div>
-                <div className='text-sm my-2'>{content?.overview}</div>
+                <div className='text-sm my-2'>{modalContent?.overview}</div>
             </div>
             <div className='my-1'>
-                <p>{content?.cast}</p>
+                <p>{modalContent?.cast}</p>
                 <div>{modalContentId ? <Genres id={modalContentId}/> : ''}</div>
                 {/* <p>{content?.revenue}$</p> */}
             </div>
