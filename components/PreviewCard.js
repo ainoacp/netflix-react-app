@@ -1,14 +1,22 @@
+import { useEffect } from "react";
 import Genres from "./Genres";
 
-const PreviewCard = ({ movie }) => {
+const PreviewCard = ({ movie, setModalVisible, setModalContentId, type, tilesDataMovie, tilesDataTv}) => {
+//  console.log('esto es la peli', movie.id)
     return (
         <div>
             <div 
-                className="shrink-0 h-28 w-48 bg-cover bg-center hover:scale-125 cursor-pointer transition ease-in-out p-2 relative flex items-end rounded z-10 hover:z-20"
+                className="shrink-0 w-[230px] h-[140px] bg-white rounded bg-cover bg-center hover:scale-125 cursor-pointer transition ease-in-out p-2 flex justify-end relative flex-col z-10 hover:z-20"
                 style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie?.backdrop_path})`,
                 }}
-                key={movie?.id}>
+                onClick={() => {
+                    setModalVisible(true)
+                    setModalContentId(movie?.id)
+                }}
+                type={type}
+                key={movie?.id}
+                >
                 <div className="flex flex-col z-10">
                     <h4 className="text-white text-sm p-1">{movie.original_title ? movie.original_title : movie.original_name}</h4>
                     <Genres id={movie.id} />

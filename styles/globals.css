@@ -11,3 +11,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.btn {
+  @apply h-4 p-10 
+}

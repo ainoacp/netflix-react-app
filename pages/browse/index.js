@@ -14,7 +14,7 @@ const Browse = () => {
     const [heroMovie, setHeroMovie] = useState()
     const [trendingMovies, setTrendingMovies] = useState()
     const [trendingTv, setTrendingTv] = useState()
-    const [modalVisible, setModalVisible] = useState(true)
+    const [modalVisible, setModalVisible] = useState(false)
     const [modalContentId, setModalContentId] = useState()
 
     useEffect(() => {
@@ -45,15 +45,32 @@ const Browse = () => {
     }, [])
 
     return (
-        <div className="bg-black w-full h-full flex flex-col px-8">
+        <div className="bg-black w-full h-full flex flex-col px-8 overflow-y-auto">
             <NavBar/>
             <Section heroMovie={heroMovie}/>
             <div className="absolute bg-black w-full h-[100vh] max-h-[100vh] bg-white/80 z-0 top-0 left-0 overflow-hidden opacity-50">
                 <div className="bg-cover bg-center w-full h-full" style={{backgroundImage: `url(${imageURL}${heroMovie?.backdrop_path})`}}></div>
             </div>
-            <Carousel type={movie} tilesData={trendingMovies} title={'Trending Movies'} setModalVisible={setModalVisible} setModalContentId={setModalContentId}/>
-            <Carousel type={tv} tilesData={trendingTv} title={'Trending TV Movies'} setModalVisible={setModalVisible} setModalContentId={setModalContentId}/>
-            <Modal modalVisible={modalVisible} setModalVisible={setModalVisible} modalContentId={modalContentId}/>
+            <Carousel 
+                type={'movie'} 
+                tilesData={trendingMovies} 
+                title={'Trending Movies'} 
+                setModalVisible={setModalVisible} 
+                setModalContentId={setModalContentId} 
+                style={'mt-[-127px]'}
+            />
+            <Carousel 
+                type={'tv'} 
+                tilesData={trendingTv} 
+                title={'Trending TV Series'} 
+                setModalVisible={setModalVisible} 
+                setModalContentId={setModalContentId}
+            />
+            <Modal 
+                modalVisible={modalVisible} 
+                setModalVisible={setModalVisible} 
+                modalContentId={modalContentId}
+            />
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const Genres = ({ id }) => {
-    // const [trendingMovie, setTrendingMovie] = useState([])
+
     const [genres, setGenres] = useState() 
 
     const baseURL = 'https://api.themoviedb.org/3'
@@ -17,10 +17,10 @@ const Genres = ({ id }) => {
       }, [])
 
     return(
-        <div className="flex flex-wrap gap-1 px-1 pb-1 text-slate-400 z-10 text-[8px]">{
+        <div className="text-white/60 gap-x-3 text-xs flex flex-row flex-wrap relative z-20">{
             genres?.map((genre) => {
                 return (
-                    <div>{genre.name}</div>
+                    <div key={genre.id}>{genre.name}</div>
                 )
             })
         }</div>
