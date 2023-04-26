@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Genres from "./Genres";
 
-const PreviewCard = ({ movie, setModalVisible, setModalContent, type, tilesDataMovie, tilesDataTv}) => {
+const PreviewCard = ({ movie, setModalVisible, setModalContent, type, tilesData, }) => {
 //  console.log('esto es la peli', movie.id)
     return (
         <div>
