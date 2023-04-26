@@ -15,7 +15,7 @@ const Browse = () => {
     const [trendingMovies, setTrendingMovies] = useState()
     const [trendingTv, setTrendingTv] = useState()
     const [modalVisible, setModalVisible] = useState(false)
-    const [modalContentId, setModalContentId] = useState()
+    const [modalContent, setModalContent] = useState()
 
     useEffect(() => {
         fetch(`${baseURL}${requests.fetchTopRated}`)
@@ -56,7 +56,7 @@ const Browse = () => {
                 tilesData={trendingMovies} 
                 title={'Trending Movies'} 
                 setModalVisible={setModalVisible} 
-                setModalContentId={setModalContentId} 
+                setModalContent={setModalContent} 
                 style={'mt-[-127px]'}
             />
             <Carousel 
@@ -64,12 +64,12 @@ const Browse = () => {
                 tilesData={trendingTv} 
                 title={'Trending TV Series'} 
                 setModalVisible={setModalVisible} 
-                setModalContentId={setModalContentId}
+                setModalContent={setModalContent}
             />
             <Modal 
                 modalVisible={modalVisible} 
                 setModalVisible={setModalVisible} 
-                modalContentId={modalContentId}
+                modalContent={modalContent}
             />
         </div>
     );

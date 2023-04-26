@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import PreviewCard from './PreviewCard'
 
-const Carousel = ({ tilesData, title, setModalVisible, setModalContentId }) => {
+const Carousel = ({ tilesData, title, setModalVisible, setModalContent }) => {
     
     useEffect(() => {
         console.log(tilesData)
@@ -19,7 +19,7 @@ const Carousel = ({ tilesData, title, setModalVisible, setModalContentId }) => {
                                 movie={movie} 
                                 key={index} 
                                 setModalVisible={setModalVisible} 
-                                setModalContentId={setModalContentId}/>
+                                setModalContent={setModalContent}/>
                         </>
                     )
                 })

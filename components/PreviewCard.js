@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Genres from "./Genres";
 
-const PreviewCard = ({ movie, setModalVisible, setModalContentId, type, tilesDataMovie, tilesDataTv}) => {
+const PreviewCard = ({ movie, setModalVisible, setModalContent, type, tilesDataMovie, tilesDataTv}) => {
 //  console.log('esto es la peli', movie.id)
     return (
         <div>
@@ -12,7 +12,7 @@ const PreviewCard = ({ movie, setModalVisible, setModalContentId, type, tilesDat
                 }}
                 onClick={() => {
                     setModalVisible(true)
-                    setModalContentId(movie?.id)
+                    setModalContent(movie)
                 }}
                 type={type}
                 key={movie?.id}

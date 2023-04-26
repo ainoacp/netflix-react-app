@@ -17,7 +17,7 @@ const Modal = ({ modalVisible, setModalVisible, modalContentId, type, modalConte
   useEffect(() => {
     console.log(modalContent?.media_type)
     if (modalContent?.media_type === 'movie') {
-        fetch(`${baseURL}/${type === 'tv' ? 'tv' : 'movie'}/${modalContent.id}/videos?api_key=${API_KEY}`)
+        fetch(`${baseURL}/movie/${modalContent.id}/videos?api_key=${API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
             console.log('VIDEOS DATA', data.results[0].key)
