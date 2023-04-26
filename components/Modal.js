@@ -41,7 +41,7 @@ const Modal = ({ modalVisible, setModalVisible, type, modalContent }) => {
         console.log('SIMILAR', data.results)
         setSimilars(data.results)
       })
-    } else if (modalContent?.media_type === 'tv'){
+    } else if (modalContent?.media_type === 'tv') {
         fetch(`${baseURL}/tv/${modalContent.id}/similar?api_key=${API_KEY}&language=ES`)
         .then((res) => res.json())
           .then((data) => {
