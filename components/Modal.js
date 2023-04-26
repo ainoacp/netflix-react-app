@@ -10,8 +10,6 @@ const Modal = ({ modalVisible, setModalVisible, type, modalContent }) => {
   
   const [similars, setSimilars] = useState()
   const [video, setVideo] = useState()
-
-  const checkVideos = () => {}
   
   useEffect(() => {
     // console.log(modalContent?.media_type)
@@ -27,28 +25,28 @@ const Modal = ({ modalVisible, setModalVisible, type, modalContent }) => {
         fetch(`${baseURL}/tv/${modalContent?.id}/videos?api_key=${API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
-            console.log('VIDEOS DATA2', data.results[0])
+            console.log('VIDEOS DATA2', data.results[0].key)
             setVideo(data.results[0].key)
         })
     }
   }, [modalContent])
 
   useEffect(() => {
-    if (modalContent?.media_type === 'movie') {
+    // if (modalContent?.media_type === 'movie') {
     fetch(`${baseURL}/movie/${modalContent.id}/similar?api_key=${API_KEY}&language=ES`)
       .then((res) => res.json())
       .then((data) => {
         console.log('SIMILAR', data.results)
         setSimilars(data.results)
       })
-    } else if (modalContent?.media_type === 'tv') {
-        fetch(`${baseURL}/tv/${modalContent.id}/similar?api_key=${API_KEY}&language=ES`)
-        .then((res) => res.json())
-          .then((data) => {
-              console.log('VIDEOS DATA', data.results[0].key)
-              setVideo(data.results[0].key)
-          })
-    }
+    // } else if (modalContent?.media_type === 'tv'){
+    //     fetch(`${baseURL}/tv/${modalContent.id}/similar?api_key=${API_KEY}&language=ES`)
+    //     .then((res) => res.json())
+    //       .then((data) => {
+    //           console.log('SIMILAR2', data.results)
+    //           setVideo(data.results)
+    //       })
+    //}
   }, [modalContent])
   
   return (
