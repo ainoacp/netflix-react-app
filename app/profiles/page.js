@@ -1,7 +1,9 @@
 import Link from "next/link"
 import Image from "next/image"
 
+
 export default function Home() {
+
   return (
     <div className="bg-black w-screen h-screen flex flex-col items-center justify-center">
       <p className={'text-white text-[3,5vw]'}>Who's watching?</p>

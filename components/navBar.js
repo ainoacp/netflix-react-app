@@ -1,8 +1,12 @@
 import NetflixLogo from '../../netflix-react-app/public/images/Vector.svg'
 import { BellIcon, MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
+import { getAuth, signOut } from 'firebase/auth'
 
 const NavBar = () => {
+
+    const auth = getAuth()
+
     return (
       <header className='flex justify-between items-center bg-gradient-to-b from-black from-15% to-transparent z-10 pt-4'>
         <div className='flex items-center'>
@@ -28,6 +32,7 @@ const NavBar = () => {
                 <div className='bg-slate-200 w-7 h-7 rounded'/>
                 <button><ChevronDownIcon className='w-6 h-6'/></button>
             </div>
+            <p onClick={() => {signOut(auth)}} className='text-white cursor-pointer'>Logout</p>
         </div>
       </header>
     );

@@ -12,9 +12,11 @@
     "@heroicons/react": "^2.0.17",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
-    "next": "13.3.0",
+    "firebase": "^9.21.0",
+    "next": "13.3.1-canary.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9"
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
