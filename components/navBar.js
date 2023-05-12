@@ -32,7 +32,7 @@ const NavBar = () => {
                 <div className='bg-slate-200 w-7 h-7 rounded'/>
                 <button><ChevronDownIcon className='w-6 h-6'/></button>
             </div>
-            <p onClick={() => {signOut(auth)}} className='text-white cursor-pointer'>Logout</p>
+            <p onClick={() => {signOut(auth)}} className='text-white cursor-pointer'>SignOut</p>
         </div>
       </header>
     );

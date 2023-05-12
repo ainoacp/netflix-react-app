@@ -8,6 +8,8 @@ import NavBar from "../../components/navBar";
 import Section from "../../components/section";
 import Carousel from "../../components/carousel"
 import Modal from "@/components/Modal";
+import { useAuthContext } from "@/components/AuthContext";
+import { useRouter } from "next/navigation";
 
 const baseURL = 'https://api.themoviedb.org/3'
 const imageURL = 'https://image.tmdb.org/t/p/original'
@@ -18,6 +20,9 @@ const Browse = () => {
     const [trendingTv, setTrendingTv] = useState()
     const [modalVisible, setModalVisible] = useState(false)
     const [modalContent, setModalContent] = useState()
+
+    const { user } = useAuthContext()
+    const router = useRouter()
 
     useEffect(() => {
         fetch(`${baseURL}${requests.fetchTopRated}`)
@@ -45,6 +50,12 @@ const Browse = () => {
                 setTrendingTv(data.results)
         })
     }, [])
+
+    useEffect(() => {
+        if (!user) {
+            router.push('/signin')
+        }
+    }, [user])
 
     return (
         <div className="bg-black w-full h-full flex flex-col px-8 overflow-y-auto">

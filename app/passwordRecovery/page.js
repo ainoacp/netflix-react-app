@@ -2,13 +2,24 @@
 
 import { GlobeAltIcon } from '@heroicons/react/20/solid'
 import { useForm } from "react-hook-form";
+import { useAuthContext } from '@/components/AuthContext';
 import Logo from '../../public/images/Vector.svg'
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const PasswordRecovery = () => {
 
+    const { user } = useAuthContext()
+    const [email, setEmail] = useState('')
+
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
+
+    useEffect(() => {
+        if (user) {
+            setEmail(user.email)
+        }
+    }, [user])
 
     return (
         <>
@@ -24,7 +35,9 @@ const PasswordRecovery = () => {
                     <input
                         placeholder="name@example.com"
                         className='bg-white h-12 rounded px-4 border border-gray-400 valid:border-red-950'
-                        type='email' {...register("email", {
+                        type='email' 
+                        value={email}
+                        {...register("email", {
                             required: "Email is mandatory.",
                             pattern: {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,

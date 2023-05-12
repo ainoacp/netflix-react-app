@@ -25,7 +25,7 @@ const SignIn = (data) => {
         const auth = getAuth(firebaseApp)
         try {
             // console.log('DATA: ', getAuth(firebaseApp))
-            result = await signInWithEmailAndPassword(auth, data.email, data.password).then(data => console.log(data.user))
+            result = await signInWithEmailAndPassword(auth, data.email, data.password).then(() => router.push('/browse'))
         } catch (e) {
             console.log(e)
             error = e

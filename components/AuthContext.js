@@ -12,16 +12,16 @@ export const useAuthContext = () => useContext(AuthContext)
 export const AuthContextProvider = ({children}) => {
     
     const [user, setUser] = useState(null)
-    const router = useRouter()
+    // const router = useRouter()
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             if (user) {
                 setUser(user)
-                router.push('/browse')
+                // router.push('/browse')
             } else {
                 setUser(null)
-                router.push('/signin')
+                // router.push('/signin')
             }
         })
         return () => unsubscribe()
